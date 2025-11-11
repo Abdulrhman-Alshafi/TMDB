@@ -78,13 +78,15 @@ const Container = styled.div`
   position: relative;
   display: flex;
   gap: 10px;
-  padding: 10px;
+  border: 2px solid #ccc;
+  border-radius: 20px;
+  width: fit-content;
 `;
 
 const Button = styled.button`
   position: relative;
   background: none;
-  border: 2px solid #ccc;
+  border: none;
   border-radius: 20px;
   padding: 8px 16px;
   cursor: pointer;
@@ -136,9 +138,82 @@ const LikeButtons = () => {
   );
 };
 
+const HeaderContainer = styled.div`
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+`;
+
+const Navbar = styled.nav`
+  display: flex;
+  justify-content: space-around;
+  background: #007bff;
+  color: white;
+  padding: 10px 0;
+  transform: translateY(${({ visible }) => (visible ? "0%" : "-100%")});
+  transition: transform 0.3s ease;
+  z-index: 1000;
+`;
+
+const NavItem = styled.div`
+  cursor: pointer;
+`;
+
+const SearchBar = styled.div`
+  position: sticky;
+  top: 0; /* always sticky below navbar */
+  background: #f5f5f5;
+  padding: 10px 20px;
+  z-index: 999;
+`;
+
+const Input = styled.input`
+  width: 100%;
+  padding: 8px 12px;
+  border-radius: 20px;
+  border: 1px solid #ccc;
+  outline: none;
+`;
+
+const Header = () => {
+  const [prevScroll, setPrevScroll] = useState(0);
+  const [navVisible, setNavVisible] = useState(true);
+
+  const handleScroll = () => {
+    const currentScroll = window.scrollY;
+    if (currentScroll > prevScroll && currentScroll > 50) {
+      setNavVisible(false); // scrolling down
+    } else {
+      setNavVisible(true); // scrolling up
+    }
+    setPrevScroll(currentScroll);
+  };
+
+  useEffect(() => {
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [prevScroll]);
+
+  return (
+    <HeaderContainer>
+      <Navbar visible={navVisible}>
+        <NavItem>Home</NavItem>
+        <NavItem>About</NavItem>
+        <NavItem>Services</NavItem>
+        <NavItem>Contact</NavItem>
+      </Navbar>
+      <SearchBar>
+        <Input placeholder="Search..." />
+      </SearchBar>
+    </HeaderContainer>
+  );
+};
+
 function App() {
   return (
     <>
+      <Header />
+      <main style={{ height: "100vh" }}></main>{" "}
       <CircularProgress percent={70} size={100} />
       <LikeButtons />
     </>
