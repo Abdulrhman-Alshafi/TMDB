@@ -72,11 +72,75 @@ const CircularProgress = ({
     </CircularProgressWrapper>
   );
 };
+import React, { useState, useRef, useEffect } from "react";
+
+const Container = styled.div`
+  position: relative;
+  display: flex;
+  gap: 10px;
+  padding: 10px;
+`;
+
+const Button = styled.button`
+  position: relative;
+  background: none;
+  border: 2px solid #ccc;
+  border-radius: 20px;
+  padding: 8px 16px;
+  cursor: pointer;
+  z-index: 1;
+  color: ${({ active }) => (active ? "white" : "black")};
+  transition: color 0.3s;
+`;
+
+const ActiveBg = styled.div`
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  background: #007bff;
+  border-radius: 20px;
+  z-index: 0;
+  transition: all 0.3s ease;
+`;
+
+const LikeButtons = () => {
+  const [activeIndex, setActiveIndex] = useState(0);
+  const [bgStyle, setBgStyle] = useState({});
+  const buttonsRef = useRef([]);
+
+  useEffect(() => {
+    if (buttonsRef.current[activeIndex]) {
+      const btn = buttonsRef.current[activeIndex];
+      setBgStyle({
+        width: btn.offsetWidth + "px",
+        left: btn.offsetLeft + "px",
+      });
+    }
+  }, [activeIndex]);
+
+  return (
+    <Container>
+      <ActiveBg style={bgStyle} />
+      {["Like", "Love", "Wow", "Haha"].map((label, index) => (
+        <Button
+          key={index}
+          ref={(el) => (buttonsRef.current[index] = el)}
+          active={activeIndex === index}
+          onClick={() => setActiveIndex(index)}
+        >
+          {label}
+        </Button>
+      ))}
+    </Container>
+  );
+};
 
 function App() {
   return (
     <>
       <CircularProgress percent={70} size={100} />
+      <LikeButtons />
     </>
   );
 }
