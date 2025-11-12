@@ -4,18 +4,26 @@ export const BannerContainer = styled.header`
   color: white;
   background-size: cover;
   background-position: center center;
-  margin-top: 50px;
+  height: 300px;
+  margin-top: 108px;
   background-image: ${({ backdrop }) =>
     `linear-gradient(to right, rgba(3, 37, 65, 0.8) 0%, rgba(3, 37, 65, 0) 100%), url("https://image.tmdb.org/t/p/original${backdrop}")`};
 `;
 
 export const BannerContents = styled.div`
-  padding: 5% 5%;
+  max-width: 1300px;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  padding: 0px 40px;
+  margin: auto;
 `;
 
 export const BannerTitle = styled.h2`
   width: 100%;
   font-size: 3rem;
+  line-height: 1;
   font-weight: 700;
   padding: 0;
 `;
@@ -24,6 +32,7 @@ export const BannerDescription = styled.h3`
   width: 100%;
   margin-bottom: 50px;
   font-size: 2rem;
+  line-height: 1;
   font-weight: 600;
 `;
 
