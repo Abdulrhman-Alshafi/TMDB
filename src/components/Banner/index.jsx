@@ -16,14 +16,19 @@ function Banner() {
 
   useEffect(() => {
     async function fetchData() {
-      const request = await axios.get(requests.fetchTrending);
-      setMovie(
-        request.data.results[
-          Math.floor(Math.random() * request.data.results.length)
-        ]
-      );
-      return request;
+      try {
+        // Fetch trending movies (weekly) for banner
+        const response = await axios.get(requests.fetchTrendingMoviesWeek);
+
+        const results = response.data.results;
+        const randomMovie = results[Math.floor(Math.random() * results.length)];
+
+        setMovie(randomMovie);
+      } catch (error) {
+        console.error("Failed to fetch banner movie:", error);
+      }
     }
+
     fetchData();
   }, []);
 
@@ -43,7 +48,7 @@ function Banner() {
             autoCorrect="off"
             autoComplete="off"
             spellCheck="false"
-            placeholder="Search for a movie, tv show, person......"
+            placeholder="Search for a movie, tv show, person..."
           />
           <SubmitButton type="submit" value="Search" />
         </SearchForm>
