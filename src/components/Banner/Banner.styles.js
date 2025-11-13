@@ -4,10 +4,18 @@ export const BannerContainer = styled.header`
   color: white;
   background-size: cover;
   background-position: center center;
-  height: 300px;
+  min-height: 300px;
+  height: calc(100vh / 2.5);
+  max-height: 360px;
   margin-top: 108px;
-  background-image: ${({ backdrop }) =>
-    `linear-gradient(to right, rgba(3, 37, 65, 0.8) 0%, rgba(3, 37, 65, 0) 100%), url("https://image.tmdb.org/t/p/original${backdrop}")`};
+
+  background: ${({ backdrop }) =>
+    `blue url("https://image.tmdb.org/t/p/original${backdrop}") no-repeat center/cover`};
+  background-blend-mode: multiply;
+  /* Bright Blue Overlay */
+  background: ${({ backdrop }) =>
+    `#2196F3 url("https://image.tmdb.org/t/p/original${backdrop}") no-repeat center/cover`};
+  background-blend-mode: multiply;
 `;
 
 export const BannerContents = styled.div`

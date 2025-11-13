@@ -9,6 +9,10 @@ const requests = {
   fetchHorrorMovies: `discover/movie?api_key=${API_KEY}&with_genres=27`,
   fetchRomanceMovies: `discover/movie?api_key=${API_KEY}&with_genres=10749`,
   fetchDocumentaries: `discover/movie?api_key=${API_KEY}&with_genres=99`,
+  // ✅ Add this for the banner / hero background image
+  fetchBannerMovie: `/discover/movie?api_key=${API_KEY}`,
+  // 🔥 Trending movies of the day
+  fetchTrendingToday: `/trending/movie/day?api_key=${API_KEY}&language=en-US`,
 };
 
 export default requests;
