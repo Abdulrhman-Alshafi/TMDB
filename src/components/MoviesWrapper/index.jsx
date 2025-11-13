@@ -8,7 +8,7 @@ const Wrapper = styled.div`
   overflow-x: auto;
   padding: 20px 40px;
   background: ${({ themeMode }) =>
-    themeMode === "dark" ? "#121212" : `url(${listBg}) no-repeat`};
+    themeMode === "dark" ? "" : `url(${listBg}) no-repeat`};
   background-size: ${({ themeMode }) =>
     themeMode === "dark" ? "cover" : "100% 145%"};
 `;

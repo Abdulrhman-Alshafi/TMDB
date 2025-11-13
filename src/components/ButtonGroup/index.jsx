@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { Container, Button, ActiveBg } from "./ButtonGroup.styles";
 
-const ButtonGroup = ({ btns, onChange }) => {
+const ButtonGroup = ({ btns, onChange, theme = "light" }) => {
   const [activeIndex, setActiveIndex] = useState(0);
   const [bgStyle, setBgStyle] = useState({});
   const buttonsRef = useRef([]);
@@ -22,14 +22,15 @@ const ButtonGroup = ({ btns, onChange }) => {
   };
 
   return (
-    <Container>
-      <ActiveBg style={bgStyle} />
+    <Container themeMode={theme}>
+      <ActiveBg style={bgStyle} themeMode={theme} />
       {btns.map((label, index) => (
         <Button
           key={index}
           ref={(el) => (buttonsRef.current[index] = el)}
           active={activeIndex === index}
           onClick={() => handleClick(index)}
+          themeMode={theme}
         >
           {label}
         </Button>
