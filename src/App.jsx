@@ -15,7 +15,7 @@ function App() {
     }
     fetchTrending();
   }, []);
-  //trung
+  //trungc
   console.log(movies);
   return (
     <>
