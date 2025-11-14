@@ -15,6 +15,7 @@ function App() {
     }
     fetchTrending();
   }, []);
+  //tring 
   console.log(movies);
   return (
     <>
