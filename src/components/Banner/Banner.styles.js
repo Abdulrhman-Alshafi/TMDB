@@ -9,13 +9,16 @@ export const BannerContainer = styled.header`
   max-height: 360px;
   margin-top: 108px;
 
-  background: ${({ backdrop }) =>
-    `blue url("https://image.tmdb.org/t/p/original${backdrop}") no-repeat center/cover`};
-  background-blend-mode: multiply;
-  /* Bright Blue Overlay */
-  background: ${({ backdrop }) =>
-    `#2196F3 url("https://image.tmdb.org/t/p/original${backdrop}") no-repeat center/cover`};
-  background-blend-mode: multiply;
+  /* TMDB Duotone Filter */
+  background-image: ${({ backdrop }) =>
+    `image-set(
+      url("https://media.themoviedb.org/t/p/w1920_and_h600_multi_faces_filter(duotone,00192f,00baff)${backdrop}") 1x,
+      url("https://media.themoviedb.org/t/p/w3840_and_h1200_multi_faces_filter(duotone,00192f,00baff)${backdrop}") 2x
+    )`};
+
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
 `;
 
 export const BannerContents = styled.div`

@@ -13,6 +13,7 @@ export const HeaderContainer = styled.header`
   transition: transform 0.3s ease;
   transform: ${({ hideNav }) =>
     hideNav ? "translateY(-60%)" : "translateY(0)"};
+  
 `;
 
 export const ContentWrapper = styled.div`
