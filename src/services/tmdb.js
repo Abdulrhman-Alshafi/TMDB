@@ -1,4 +1,4 @@
-import requests, { API_KEY } from "../request";
+import { API_KEY } from "../request";
 
 const tmdbFetch = async (endpoint) => {
     const url = `https://api.themoviedb.org/3${endpoint}`;
