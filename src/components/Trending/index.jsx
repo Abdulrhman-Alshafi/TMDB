@@ -1,66 +1,17 @@
-import styled from "styled-components";
-import ButtonGroup from "../ButtonGroup";
-import { useEffect, useState } from "react";
-import axios from "../../axios";
+// Trending/index.jsx
+import React, { useEffect, useState } from "react";
+import tmdbFetch from "../../services/tmdb";
 import requests from "../../request";
+
+import ButtonGroup from "../ButtonGroup";
 import MoviesWrapper from "../MoviesWrapper";
 
-const TrendingSection = styled.section`
-  padding: 2rem 0;
-  width: 100%;
-  color: ${({ themeMode }) => (themeMode === "dark" ? "#fff" : "#000")};
-  background-color: ${({ themeMode }) =>
-    themeMode === "dark" ? "#121212" : "#fff"};
-
-  ${({ themeMode, backdrop }) =>
-    themeMode === "dark"
-      ? `
-        background: 
-          linear-gradient(
-            to right,
-            rgba(3, 37, 65, 0.75) 0%,
-            rgba(3, 37, 65, 0.75) 100%
-          ),
-          url("https://image.tmdb.org/t/p/original${backdrop}") no-repeat center/cover;
-      `
-      : `
-        background: #fff;
-      `}
-`;
-
-const ContentWrapper = styled.div`
-  max-width: 1300px;
-  margin: 0 auto;
-  position: relative;
-
-  &::after {
-    content: "";
-    position: absolute;
-    top: 0;
-    right: 0;
-    width: 80px;
-    height: 100%;
-    pointer-events: none;
-    background: linear-gradient(
-      to left,
-      ${({ themeMode }) => (themeMode === "dark" ? "#121212" : "#fff")},
-      rgba(255, 255, 255, 0)
-    );
-  }
-`;
-
-const TrendingHeader = styled.div`
-  display: flex;
-  align-items: center;
-  padding: 0 40px;
-`;
-
-const TrendingTitle = styled.h2`
-  white-space: nowrap;
-  font-weight: 600;
-  margin-right: 20px;
-  color: ${({ themeMode }) => (themeMode === "dark" ? "#fff" : "#000")};
-`;
+import {
+  TrendingSection,
+  ContentWrapper,
+  TrendingHeader,
+  TrendingTitle,
+} from "./Trending.styles";
 
 const Trending = ({
   type = "movie",
@@ -70,28 +21,28 @@ const Trending = ({
 }) => {
   const [items, setItems] = useState([]);
   const [timeframe, setTimeframe] = useState(defaultTimeframe);
-  const [movie, setMovie] = useState(0);
+  const [movie, setMovie] = useState({});
+
   useEffect(() => {
     async function fetchTrending() {
       try {
-        let url;
+        let endpoint;
 
         if (type === "movie") {
-          url =
+          endpoint =
             timeframe === "Today"
               ? requests.fetchTrendingMoviesToday
               : requests.fetchTrendingMoviesWeek;
-        } else if (type === "tv") {
-          url =
+        } else {
+          endpoint =
             timeframe === "Today"
               ? requests.fetchTrendingTVToday
               : requests.fetchTrendingTVWeek;
         }
 
-        const res = await axios.get(url);
+        const { results } = await tmdbFetch(endpoint);
 
-        // Normalize data shape
-        const normalized = res.data.results.map((item) => ({
+        const normalized = results.map((item) => ({
           id: item.id,
           title:
             item.title ||
@@ -114,24 +65,22 @@ const Trending = ({
 
     fetchTrending();
   }, [timeframe, type]);
+
+  // ── 2. Random backdrop (same as Banner) ───────────────────────────────────
   useEffect(() => {
-    async function fetchData() {
+    async function fetchBackdrop() {
       try {
-        // Fetch trending movies (weekly) for banner
-        const response = await axios.get(requests.fetchTrendingMoviesWeek);
-
-        const results = response.data.results;
-        const randomMovie = results[Math.floor(Math.random() * results.length)];
-
-        setMovie(randomMovie);
+        const { results } = await tmdbFetch(requests.fetchTrendingMoviesWeek);
+        const random = results[Math.floor(Math.random() * results.length)];
+        setMovie(random);
       } catch (error) {
-        console.error("Failed to fetch banner movie:", error);
+        console.error("Failed to fetch backdrop movie:", error);
       }
     }
 
-    fetchData();
+    fetchBackdrop();
   }, []);
-  console.log(items);
+
   const handleTimeframeChange = (selected) => setTimeframe(selected);
 
   return (
@@ -139,6 +88,7 @@ const Trending = ({
       <ContentWrapper themeMode={theme}>
         <TrendingHeader>
           <TrendingTitle themeMode={theme}>{title}</TrendingTitle>
+
           <ButtonGroup
             btns={["Today", "This Week"]}
             onChange={handleTimeframeChange}

@@ -1,5 +1,6 @@
+// Banner/index.jsx
 import React, { useEffect, useState } from "react";
-import axios from "../../axios";
+import tmdbFetch from "../../services/tmdb";
 import requests from "../../request";
 import {
   BannerContainer,
@@ -17,12 +18,8 @@ function Banner() {
   useEffect(() => {
     async function fetchData() {
       try {
-        // Fetch trending movies (weekly) for banner
-        const response = await axios.get(requests.fetchTrendingMoviesWeek);
-
-        const results = response.data.results;
+        const { results } = await tmdbFetch(requests.fetchTrendingMoviesWeek);
         const randomMovie = results[Math.floor(Math.random() * results.length)];
-
         setMovie(randomMovie);
       } catch (error) {
         console.error("Failed to fetch banner movie:", error);

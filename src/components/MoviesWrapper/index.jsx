@@ -1,17 +1,6 @@
-import styled from "styled-components";
-import listBg from "../../assets/list.svg";
-import MovieCard from "../MovieCard";
 
-const Wrapper = styled.div`
-  display: flex;
-  gap: 20px;
-  overflow-x: auto;
-  padding: 20px 40px;
-  background: ${({ themeMode }) =>
-    themeMode === "dark" ? "" : `url(${listBg}) no-repeat`};
-  background-size: ${({ themeMode }) =>
-    themeMode === "dark" ? "cover" : "100% 145%"};
-`;
+import MovieCard from "../MovieCard";
+import { Wrapper } from "./MoviesWrapper.styles";
 
 const MoviesWrapper = ({ movies, theme = "light" }) => {
   if (!movies.length)
