@@ -11,8 +11,8 @@ export const HeaderContainer = styled.header`
   flex-direction: column;
   background-color: #fff;
   transition: transform 0.3s ease;
-  transform: ${({ $hideNav }) =>
-    $hideNav ? "translateY(-60%)" : "translateY(0)"};
+  transform: ${({ hideNav }) =>
+    hideNav ? "translateY(-60%)" : "translateY(0)"};
 `;
 
 export const ContentWrapper = styled.div`
@@ -242,6 +242,7 @@ export const TrendingList = styled.ul`
 export const TrendingItem = styled.li`
   cursor: pointer;
   transition: 0.2s ease;
+  border-bottom: 1px solid rgba(227, 227, 227, 1);
   &:hover {
     background: rgba(227, 227, 227, 0.3);
   }

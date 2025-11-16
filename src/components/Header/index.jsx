@@ -8,7 +8,7 @@ const Header = () => {
   const [hideNav, setHideNav] = useState(false);
   const [lastScrollY, setLastScrollY] = useState(0);
 
-  const headerSearchRef = useRef(null); // ✅ new ref for header blue search icon
+  const headerSearchRef = useRef(null);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -24,7 +24,7 @@ const Header = () => {
     <HeaderContainer hideNav={hideNav}>
       <DesktopNav focusSearch={() => headerSearchRef.current?.focus()} />
       <MobileNav />
-      <SearchBar headerSearchRef={headerSearchRef} /> {/* ✅ pass new ref */}
+      <SearchBar headerSearchRef={headerSearchRef} />
     </HeaderContainer>
   );
 };
