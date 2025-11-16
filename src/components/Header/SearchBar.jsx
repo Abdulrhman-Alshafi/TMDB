@@ -13,7 +13,7 @@ import { debounce } from "../../utils/debounce";
 import ClickOutsideWrapper from "./ClickOutsideWrapper";
 import { TMDB } from "../../services/tmdb";
 
-const SearchBar = () => {
+const SearchBar = ({ headerSearchRef }) => {
   const [searchText, setSearchText] = useState("");
   const [showDropdown, setShowDropdown] = useState(false);
   const [trending, setTrending] = useState([]);
@@ -81,7 +81,7 @@ const SearchBar = () => {
             <NavIcons src={searchDark} height={20} alt="Search" marginL="0" />
           </button>
           <SearchInput
-            ref={searchInputRef}
+            ref={(searchInputRef, headerSearchRef)}
             type="text"
             placeholder="Search for a movie, tv show, person..."
             value={searchText}

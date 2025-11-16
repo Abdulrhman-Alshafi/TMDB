@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import DesktopNav from "./DesktopNav";
 import MobileNav from "./MobileNav";
 import SearchBar from "./SearchBar";
@@ -8,7 +8,8 @@ const Header = () => {
   const [hideNav, setHideNav] = useState(false);
   const [lastScrollY, setLastScrollY] = useState(0);
 
-  // Hide nav on scroll
+  const headerSearchRef = useRef(null); // ✅ new ref for header blue search icon
+
   useEffect(() => {
     const handleScroll = () => {
       const current = window.scrollY;
@@ -21,9 +22,9 @@ const Header = () => {
 
   return (
     <HeaderContainer hideNav={hideNav}>
-      <DesktopNav />
+      <DesktopNav focusSearch={() => headerSearchRef.current?.focus()} />
       <MobileNav />
-      <SearchBar />
+      <SearchBar headerSearchRef={headerSearchRef} /> {/* ✅ pass new ref */}
     </HeaderContainer>
   );
 };

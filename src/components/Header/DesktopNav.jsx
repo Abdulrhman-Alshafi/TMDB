@@ -16,7 +16,7 @@ import searchBlue from "../../assets/search-blue.svg";
 import plus from "../../assets/plus.svg";
 import { useNavigate } from "react-router-dom";
 
-const DesktopNav = () => {
+const DesktopNav = ({ focusSearch }) => {
   const navigate = useNavigate();
   return (
     <Navbar>
@@ -41,7 +41,13 @@ const DesktopNav = () => {
           <NavLang href="#">en</NavLang>
           <NavLink href="#">Login</NavLink>
           <NavLink href="#">Join TMDB</NavLink>
-          <NavIcons src={searchBlue} height={29.12} alt="Search" />
+          <NavIcons
+            src={searchBlue}
+            height={29.12}
+            alt="Search"
+            style={{ cursor: "pointer" }}
+            onClick={focusSearch}
+          />
         </NavRight>
       </ContentWrapper>
     </Navbar>

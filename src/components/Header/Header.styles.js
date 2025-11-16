@@ -126,12 +126,32 @@ export const SearchWrapper = styled.div`
   height: 100%;
   margin: 0 auto;
   padding: 0 40px;
+  button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+  }
+  .lucide-spin {
+    animation: spin 1s linear infinite;
+  }
+
+  @keyframes spin {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
 `;
 
 export const SearchInput = styled.input`
   width: 100%;
   height: 100%;
-  max-width: 600px;
+  flex: 1;
   border: none;
   font-size: 1rem;
   outline: none;
