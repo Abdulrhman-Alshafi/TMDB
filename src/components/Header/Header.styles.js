@@ -12,7 +12,7 @@ export const HeaderContainer = styled.header`
   background-color: #fff;
   transition: transform 0.3s ease;
   transform: ${({ hideNav }) =>
-    hideNav ? "translateY(-60%)" : "translateY(0)"};
+    hideNav ? "translateY(-64px)" : "translateY(0)"};
 `;
 
 export const ContentWrapper = styled.div`
@@ -164,7 +164,7 @@ export const SearchInput = styled.input`
 // ===== Mobile Elements =====
 export const MobileNavBar = styled.div`
   display: none;
-  background-color: rgba(3, 37, 65);
+  background-color: rgba(3, 37, 65,1);
   height: 64px;
   color: white;
   align-items: center;
@@ -191,7 +191,7 @@ export const MobileMenuPanel = styled.div`
   left: 0;
   width: 90%;
   max-width: 320px;
-  height: calc(100vh - 64px);
+  height: calc(100vh - 32px);
   background-color: rgba(3, 37, 65, 0.98);
   color: white;
   display: flex;

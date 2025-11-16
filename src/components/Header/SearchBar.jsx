@@ -25,19 +25,19 @@ const SearchBar = ({ headerSearchRef }) => {
 
   const navigate = useNavigate();
   const searchInputRef = useRef(null);
-
-  useEffect(() => {
-    async function loadTrending() {
-      setTrendingLoading(true);
-      try {
-        const data = await TMDB.getTrendingAllDay();
-        setTrending(data.results || []);
-      } catch {
-        setTrendingError(true);
-      } finally {
-        setTrendingLoading(false);
-      }
+  //loading tring 
+  async function loadTrending() {
+    setTrendingLoading(true);
+    try {
+      const data = await TMDB.getTrendingAllDay();
+      setTrending(data.results || []);
+    } catch {
+      setTrendingError(true);
+    } finally {
+      setTrendingLoading(false);
     }
+  }
+  useEffect(() => {
     loadTrending();
   }, []);
 

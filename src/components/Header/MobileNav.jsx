@@ -21,7 +21,7 @@ const MobileNav = () => {
           onClick={() => setMenuOpen(!menuOpen)}
           style={{ background: "none", border: "none", cursor: "pointer" }}
         >
-          {menuOpen ? <X size={28} /> : <Menu size={28} />}
+          {menuOpen ? <X size={28} color="white" /> : <Menu size={28} color="white" />}
         </button>
         <NavLogo
           src={footerLogo}
