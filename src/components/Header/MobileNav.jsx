@@ -9,10 +9,11 @@ import {
 import { Menu, X, User } from "lucide-react";
 import footerLogo from "../../assets/footer-logo.svg";
 import searchBlue from "../../assets/search-blue.svg";
+import { useNavigate } from "react-router-dom";
 
 const MobileNav = () => {
   const [menuOpen, setMenuOpen] = useState(false);
-
+  const navigate = useNavigate();
   return (
     <>
       <MobileNavBar>
@@ -22,7 +23,14 @@ const MobileNav = () => {
         >
           {menuOpen ? <X size={28} /> : <Menu size={28} />}
         </button>
-        <NavLogo src={footerLogo} height={36} alt="TMDB" />
+        <NavLogo
+          src={footerLogo}
+          height={36}
+          alt="TMDB"
+          onClick={() => {
+            navigate("/");
+          }}
+        />
         <div style={{ display: "flex", alignItems: "center", gap: "16px" }}>
           <User size={24} />
           <img src={searchBlue} alt="Search" height={25} />

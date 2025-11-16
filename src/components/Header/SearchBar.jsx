@@ -8,11 +8,10 @@ import {
   NavIcons,
 } from "./Header.styles";
 import searchDark from "../../assets/search-dark.svg";
-
 import TrendingDropdown from "./TrendingDropdown";
-import { API_KEY } from "../../request";
 import { debounce } from "../../utils/debounce";
 import ClickOutsideWrapper from "./ClickOutsideWrapper";
+import { TMDB } from "../../services/tmdb";
 
 const SearchBar = () => {
   const [searchText, setSearchText] = useState("");
@@ -28,38 +27,34 @@ const SearchBar = () => {
   const searchInputRef = useRef(null);
 
   useEffect(() => {
-    const fetchTrending = async () => {
-      if (!API_KEY) return setTrendingError(true);
+    async function loadTrending() {
       setTrendingLoading(true);
       try {
-        const res = await fetch(
-          `https://api.themoviedb.org/3/trending/all/day?api_key=${API_KEY}`
-        );
-        if (!res.ok) throw new Error("Failed");
-        const data = await res.json();
+        const data = await TMDB.getTrendingAllDay();
         setTrending(data.results || []);
       } catch {
         setTrendingError(true);
       } finally {
         setTrendingLoading(false);
       }
-    };
-    fetchTrending();
+    }
+    loadTrending();
   }, []);
 
   const performSearch = useCallback(
-    debounce((query) => {
+    debounce(async (query) => {
       if (!query.trim()) return setSearchResults([]);
+
       setSearchLoading(true);
-      fetch(
-        `https://api.themoviedb.org/3/search/multi?api_key=${API_KEY}&query=${encodeURIComponent(
-          query
-        )}&page=1`
-      )
-        .then((res) => res.json())
-        .then((data) => setSearchResults(data.results || []))
-        .catch(() => setSearchError(true))
-        .finally(() => setSearchLoading(false));
+
+      try {
+        const data = await TMDB.searchMulti(query);
+        setSearchResults(data.results || []);
+      } catch {
+        setSearchError(true);
+      } finally {
+        setSearchLoading(false);
+      }
     }, 300),
     []
   );
@@ -83,7 +78,7 @@ const SearchBar = () => {
             type="submit"
             style={{ background: "none", border: "none", cursor: "pointer" }}
           >
-            <NavIcons src={searchDark} height={20} alt="Search" />
+            <NavIcons src={searchDark} height={20} alt="Search" marginL="0" />
           </button>
           <SearchInput
             ref={searchInputRef}

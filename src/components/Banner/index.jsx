@@ -1,7 +1,6 @@
-// Banner/index.jsx
-import React, { useEffect, useState } from "react";
-import tmdbFetch from "../../services/tmdb";
-import requests from "../../request";
+import { useEffect, useState } from "react";
+import { TMDB } from "../../services/tmdb";
+
 import {
   BannerContainer,
   BannerContents,
@@ -14,18 +13,17 @@ import {
 
 function Banner() {
   const [movie, setMovie] = useState({});
-
   useEffect(() => {
     async function fetchData() {
       try {
-        const { results } = await tmdbFetch(requests.fetchTrendingMoviesWeek);
-        const randomMovie = results[Math.floor(Math.random() * results.length)];
+        const data = await TMDB.getTrendingMoviesWeek();
+        const randomMovie =
+          data.results[Math.floor(Math.random() * data.results.length)];
         setMovie(randomMovie);
       } catch (error) {
         console.error("Failed to fetch banner movie:", error);
       }
     }
-
     fetchData();
   }, []);
 

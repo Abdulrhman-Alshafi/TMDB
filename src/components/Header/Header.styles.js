@@ -87,6 +87,7 @@ export const NavRight = styled.div`
 `;
 
 export const NavLogo = styled.img`
+  cursor: pointer;
   display: block;
   margin-right: 16px;
   width: 154px;

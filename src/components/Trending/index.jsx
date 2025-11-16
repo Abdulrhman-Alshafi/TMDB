@@ -1,6 +1,6 @@
 // Trending/index.jsx
-import React, { useEffect, useState } from "react";
-import tmdbFetch from "../../services/tmdb";
+import { useEffect, useState } from "react";
+import { TMDB } from "../../services/tmdb";
 import requests from "../../request";
 
 import ButtonGroup from "../ButtonGroup";
@@ -12,6 +12,7 @@ import {
   TrendingHeader,
   TrendingTitle,
 } from "./Trending.styles";
+import { tmdbFetch } from "../../services/tmdbClient";
 
 const Trending = ({
   type = "movie",
@@ -26,23 +27,21 @@ const Trending = ({
   useEffect(() => {
     async function fetchTrending() {
       try {
-        let endpoint;
+        let data;
 
         if (type === "movie") {
-          endpoint =
+          data =
             timeframe === "Today"
-              ? requests.fetchTrendingMoviesToday
-              : requests.fetchTrendingMoviesWeek;
+              ? await TMDB.getTrendingMoviesToday()
+              : await TMDB.getTrendingMoviesWeek();
         } else {
-          endpoint =
+          data =
             timeframe === "Today"
-              ? requests.fetchTrendingTVToday
-              : requests.fetchTrendingTVWeek;
+              ? await TMDB.getTrendingTVToday()
+              : await TMDB.getTrendingTVWeek();
         }
 
-        const { results } = await tmdbFetch(endpoint);
-
-        const normalized = results.map((item) => ({
+        const normalized = data.results.map((item) => ({
           id: item.id,
           title:
             item.title ||

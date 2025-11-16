@@ -1,15 +1,31 @@
-import { API_KEY } from "../request";
+import { tmdbFetch } from "./tmdbClient";
+import endpoints from "./endpoints";
 
-const tmdbFetch = async (endpoint) => {
-    const url = `https://api.themoviedb.org/3${endpoint}`;
-    const res = await fetch(url);
+export const TMDB = {
+  // Trending
+  getTrendingMoviesToday: () =>
+    tmdbFetch(endpoints.trendingMovieToday, { language: "en-US" }),
 
-    if (!res.ok) {
-        const err = await res.json().catch(() => ({}));
-        throw new Error(err.status_message || `HTTP ${res.status}`);
-    }
+  getTrendingMoviesWeek: () =>
+    tmdbFetch(endpoints.trendingMovieWeek, { language: "en-US" }),
 
-    return res.json();
+  getTrendingTVToday: () =>
+    tmdbFetch(endpoints.trendingTVToday, { language: "en-US" }),
+
+  getTrendingTVWeek: () =>
+    tmdbFetch(endpoints.trendingTVWeek, { language: "en-US" }),
+
+  getTrendingAllWeek: () =>
+    tmdbFetch(endpoints.trendingAllWeek, { language: "en-US" }),
+
+  getTrendingAllDay: () =>
+    tmdbFetch(endpoints.trendingAllDay, { language: "en-US" }),
+
+  // Search
+  searchMulti: (query) =>
+    tmdbFetch(endpoints.searchMulti, {
+      query,
+      page: 1,
+      include_adult: false,
+    }),
 };
-
-export default tmdbFetch;
