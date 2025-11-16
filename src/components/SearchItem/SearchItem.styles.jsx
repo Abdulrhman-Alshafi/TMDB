@@ -20,8 +20,8 @@ export const PosterWrapper = styled.div`
 `;
 
 export const PersonPosterWrapper = styled(PosterWrapper)`
-  width: 110px;
-  height: 165px;
+  width: 70px;
+  height: 70px;
 `;
 
 export const Poster = styled.img`
@@ -42,15 +42,7 @@ export const PersonCard = styled.div`
   display: flex;
   gap: 1.2rem;
   padding: 1rem;
-  background: #fafafa;
   border-radius: 8px;
-  box-shadow: 0 2px 6px rgba(0,0,0,.07);
-  transition: transform .2s, box-shadow .2s;
-
-  &:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 8px 16px rgba(0,0,0,.12);
-  }
 `;
 
 export const PersonInfo = styled.div`
@@ -61,30 +53,24 @@ export const PersonInfo = styled.div`
 `;
 
 export const PersonName = styled.h3`
-  margin: 0 0 .4rem;
-  font-size: 1.35rem;
+  font-size: 19px;
+  font-weight: 600;
   color: #111;
 `;
 
 export const Department = styled.div`
-  font-size: .9rem;
-  color: #007bff;
-  margin-bottom: .3rem;
+  font-size: 16px;
+  margin-bottom: 0.3rem;
+  display: flex;
+  align-items: start;
+  gap: 4px;
 `;
 
 export const KnownFor = styled.div`
-  font-size: .95rem;
-  color: #444;
+  font-size: 0.95rem;
+  color: #000;
+  font-weight: 300;
   line-height: 1.4;
-  strong { color: #111; }
-  .chip { color: #007bff; font-weight: 500; }
-`;
-
-export const Popularity = styled.div`
-  margin-top: .5rem;
-  font-size: .85rem;
-  color: #777;
-  strong { color: #d32f2f; }
 `;
 
 /* ────── MEDIA ITEM ────── */
@@ -94,7 +80,9 @@ export const ResultItem = styled.div`
   padding: 1rem 0;
   border-bottom: 1px solid #eee;
 
-  &:last-child { border-bottom: none; }
+  &:last-child {
+    border-bottom: none;
+  }
 `;
 
 export const Info = styled.div`
@@ -127,25 +115,25 @@ export const Extra = styled.div`
 
 /* ────── PLACEHOLDERS ────── */
 export const PersonPlaceholder = () => (
-    <PersonPosterWrapper>
-        <IconPlaceholder>
-            <User size={56} strokeWidth={1.5} />
-        </IconPlaceholder>
-    </PersonPosterWrapper>
+  <PersonPosterWrapper>
+    <IconPlaceholder>
+      <User size={56} strokeWidth={1.5} />
+    </IconPlaceholder>
+  </PersonPosterWrapper>
 );
 
 export const MediaPlaceholder = () => (
-    <PosterWrapper>
-        <IconPlaceholder>
-            <Film size={56} strokeWidth={1.5} />
-        </IconPlaceholder>
-    </PosterWrapper>
+  <PosterWrapper>
+    <IconPlaceholder>
+      <Film size={56} strokeWidth={1.5} />
+    </IconPlaceholder>
+  </PosterWrapper>
 );
 
 export const FallbackPlaceholder = () => (
-    <PosterWrapper>
-        <IconPlaceholder>
-            <SearchIcon size={56} strokeWidth={1.5} />
-        </IconPlaceholder>
-    </PosterWrapper>
+  <PosterWrapper>
+    <IconPlaceholder>
+      <SearchIcon size={56} strokeWidth={1.5} />
+    </IconPlaceholder>
+  </PosterWrapper>
 );

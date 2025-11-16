@@ -11,9 +11,8 @@ export const HeaderContainer = styled.header`
   flex-direction: column;
   background-color: #fff;
   transition: transform 0.3s ease;
-  transform: ${({ hideNav }) =>
-    hideNav ? "translateY(-60%)" : "translateY(0)"};
-  
+  transform: ${({ $hideNav }) =>
+    $hideNav ? "translateY(-60%)" : "translateY(0)"};
 `;
 
 export const ContentWrapper = styled.div`
@@ -69,8 +68,7 @@ export const NavLang = styled.a`
 
 export const NavIcons = styled.img`
   height: ${(props) => props.height}px;
-  margin-left: 30px;
-  margin-left: ${(props) => props.marginL}px;
+  margin-left: ${(props) => props.marginL || "30px"};
 `;
 
 export const NavLink = styled.a`
@@ -107,7 +105,8 @@ export const NavItem = styled.li`
   font-weight: 600;
 `;
 
-export const SearchBarContainer = styled.form`
+// ===== Search =====
+export const SearchBarContainer = styled.div`
   border-top: 1px solid #e2e8f0;
   border-bottom: 1px solid rgba(227, 227, 227, 1);
   position: sticky;
@@ -187,4 +186,75 @@ export const MobileNavItem = styled.div`
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
   font-size: 1.1rem;
   font-weight: 500;
+`;
+
+export const SearchTrendingWrapper = styled.div`
+  width: 100%;
+  background: rgba(227, 227, 227, 0.3);
+  border-bottom: 1px solid rgba(227, 227, 227, 1);
+`;
+
+export const SearchTrendingHeader = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  max-width: 1300px;
+  margin: auto;
+  padding: 10px 40px;
+  img {
+    width: 24px;
+    height: 24px;
+  }
+
+  h3 {
+    font-size: 20px;
+    font-weight: 700;
+  }
+`;
+
+export const TrendingList = styled.ul`
+  list-style: none;
+  margin: 0;
+  padding: 0;
+`;
+
+export const TrendingItem = styled.li`
+  cursor: pointer;
+  transition: 0.2s ease;
+  &:hover {
+    background: rgba(227, 227, 227, 0.3);
+  }
+`;
+
+export const TrendingItemContent = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  max-width: 1300px;
+  padding: 4px 40px;
+  margin: auto;
+  span {
+    font-size: 14px;
+  }
+`;
+
+export const SearchTrending = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  background: white;
+  border-top: 1px solid #e2e8f0;
+  position: relative;
+  z-index: 100;
+`;
+import { Loader2 } from "lucide-react";
+
+export const SpinningLoader = styled(Loader2)`
+  animation: spin 1s linear infinite;
+
+  @keyframes spin {
+    to {
+      transform: rotate(360deg);
+    }
+  }
 `;
