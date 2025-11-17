@@ -1,4 +1,3 @@
-// Trending/index.jsx
 import { useEffect, useState } from "react";
 import { TMDB } from "../../services/tmdb";
 import requests from "../../request";
@@ -65,18 +64,16 @@ const Trending = ({
     fetchTrending();
   }, [timeframe, type]);
 
-  // ── 2. Random backdrop (same as Banner) ───────────────────────────────────
-  useEffect(() => {
-    async function fetchBackdrop() {
-      try {
-        const { results } = await tmdbFetch(requests.fetchTrendingMoviesWeek);
-        const random = results[Math.floor(Math.random() * results.length)];
-        setMovie(random);
-      } catch (error) {
-        console.error("Failed to fetch backdrop movie:", error);
-      }
+  async function fetchBackdrop() {
+    try {
+      const { results } = await tmdbFetch(requests.fetchTrendingMoviesWeek);
+      const random = results[Math.floor(Math.random() * results.length)];
+      setMovie(random);
+    } catch (error) {
+      console.error("Failed to fetch backdrop movie:", error);
     }
-
+  }
+  useEffect(() => {
     fetchBackdrop();
   }, []);
 

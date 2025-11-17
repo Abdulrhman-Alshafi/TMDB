@@ -24,6 +24,17 @@ export default function Search() {
   const [loading, setLoading] = useState(false);
   const [counts, setCounts] = useState({});
 
+  //end points
+  const searchEndpoints = {
+    movie: endpoints.searchMovie,
+    tv: endpoints.searchTv,
+    person: endpoints.searchPerson,
+    collection: endpoints.searchCollection,
+    company: endpoints.searchCompany,
+    keyword: endpoints.searchKeyword,
+    multi: endpoints.searchMulti,
+  };
+
   /* ────── FETCH ────── */
   useEffect(() => {
     if (!query) {
@@ -35,16 +46,6 @@ export default function Search() {
 
     const controller = new AbortController();
     setLoading(true);
-
-    const searchEndpoints = {
-      movie: endpoints.searchMovie,
-      tv: endpoints.searchTv,
-      person: endpoints.searchPerson,
-      collection: endpoints.searchCollection,
-      company: endpoints.searchCompany,
-      keyword: endpoints.searchKeyword,
-      multi: endpoints.searchMulti,
-    };
 
     const fetchData = async () => {
       try {

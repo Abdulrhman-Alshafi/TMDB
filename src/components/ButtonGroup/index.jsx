@@ -26,7 +26,7 @@ const ButtonGroup = ({ btns, onChange, theme = "light" }) => {
       <ActiveBg style={bgStyle} themeMode={theme} />
       {btns.map((label, index) => (
         <Button
-          key={index}
+          key={label}
           ref={(el) => (buttonsRef.current[index] = el)}
           active={activeIndex === index}
           onClick={() => handleClick(index)}

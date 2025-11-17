@@ -3,7 +3,7 @@ import styled from "styled-components";
 
 export const Sidebar = styled.aside`
   min-width: 260px;
-  border: 1px solid rgba(227,227,227,1);
+  border: 1px solid rgba(227, 227, 227, 1);
   border-radius: 8px;
   overflow: hidden;
   height: fit-content;
@@ -16,7 +16,7 @@ export const Sidebar = styled.aside`
     font-weight: 600;
     padding: 20px;
     color: #fff;
-    background-color: rgba(1,180,228,1);
+    background-color: rgba(1, 180, 228, 1);
     font-size: 1.2em;
   }
 `;
@@ -36,7 +36,9 @@ export const SidebarButton = styled.button`
   cursor: pointer;
   transition: all 0.2s;
 
-  &:hover { background: rgba(0,0,0,0.04); }
+  &:hover {
+    background: rgba(0, 0, 0, 0.04);
+  }
 
   span {
     color: #000;
@@ -44,21 +46,10 @@ export const SidebarButton = styled.button`
     align-items: center;
     font-size: 14px;
     font-weight: 300;
-    background-color: rgba(0,0,0,.08);
+    background-color: rgba(0, 0, 0, 0.08);
     padding: 0 10px;
     border-radius: 8px;
     margin-right: 20px;
     white-space: nowrap;
   }
 `;
-
-// List of types for search filters
-export const typeList = [
-    { key: "movie", label: "Movies" },
-    { key: "tv", label: "TV Shows" },
-    { key: "person", label: "People" },
-    { key: "collection", label: "Collections" },
-    { key: "company", label: "Companies" },
-    { key: "keyword", label: "Keywords" },
-    { key: "multi", label: "All" },
-];
